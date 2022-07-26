@@ -7,11 +7,15 @@ namespace ProjectPenjualan
     {
         // deklarasi objek collection untuk menampung objek penjualan
         public static List<Penjualan> list = new List<Penjualan>();
-
+        /// <summary>
+        /// Fungsi main program
+        /// </summary>
         static void Main(string[] args)
         {
+            //Untuk mengubah judul dari aplikasi cli kita
             Console.Title = "Responsi UAS Matakuliah Pemrograman";
 
+            //perulangan logika program
             while (true)
             {
                 TampilMenu();
@@ -57,13 +61,50 @@ namespace ProjectPenjualan
             Penjualan pjl = new Penjualan();
             pjl.Nota = Console.ReadLine();
             Console.Write("Tanggal: ");
-            pjl.Tanggal = Console.ReadLine();
+            //pengecekan apakah input tanggal valid
+            if (DateTime.TryParse(Console.ReadLine(), out var tgl))
+            {
+                pjl.Tanggal = tgl;
+            }
+            else
+            {
+                Console.WriteLine("Tanggal tidak valid");
+                Console.WriteLine("Tekan ENTER untuk kembali ke menu");
+                Console.ReadKey();
+            }
             Console.Write("Customer: ");
             pjl.Customer = Console.ReadLine();
             Console.Write("Jenis [T/K]: ");
-            pjl.Jenis = Console.ReadLine() == "T" ? "Tunai" : "Kredit";
+            var tmp = Console.ReadLine().ToLower();
+            //pengecekan apakah input jenis valid
+            if (tmp == "k" || tmp == "kredit")
+            {
+                pjl.Jenis = "Kredit";
+            }
+            else if (tmp == "t" || tmp == "tunai")
+            {
+                pjl.Jenis = "Tunai";
+            }
+            else
+            {
+                Console.WriteLine("Input tidak valid");
+                Console.WriteLine("Tekan ENTER untuk kembali ke menu");
+                Console.ReadKey();
+                return;
+            }
             Console.Write("Total Nota: ");
-            pjl.TotalNota = Console.ReadLine();
+            //pengecekan apakah input TotalNota yang berupa integer valid
+            if (int.TryParse(Console.ReadLine(), out var total))
+            {
+                pjl.TotalNota = total;
+            }
+            else
+            {
+                Console.WriteLine("Input tidak valid");
+                Console.WriteLine("Tekan ENTER untuk kembali ke menu");
+                Console.ReadKey();
+            }
+            //menambahkan objek kedalam list collection
             list.Add(pjl);
             Console.WriteLine("\nTekan ENTER untuk kembali ke menu");
             Console.ReadKey();
@@ -74,9 +115,10 @@ namespace ProjectPenjualan
             Console.Clear();
             int counter = 0;
 
+            //perulangan foreach untuk menampilkan seluruh objek di list penjualan
             foreach (Penjualan pj in list)
             {
-                Console.WriteLine($"{++counter}. {pj.Nota}, {pj.Tanggal}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
+                Console.WriteLine($"{++counter}. {pj.Nota}, {pj.Tanggal:D}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
             }
 
             Console.WriteLine("\nTekan enter untuk kembali ke menu");
