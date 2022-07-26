@@ -106,6 +106,7 @@ namespace ProjectPenjualan
             }
             //menambahkan objek kedalam list collection
             list.Add(pjl);
+            Console.WriteLine("Penjualan berhasil ditambah");
             Console.WriteLine("\nTekan ENTER untuk kembali ke menu");
             Console.ReadKey();
         }
