@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ProjectPenjualan
 {
@@ -68,10 +69,11 @@ namespace ProjectPenjualan
                 Console.WriteLine("Input tidak valid");
                 Console.WriteLine("Tekan ENTER untuk kembali ke menu");
                 Console.ReadKey();
+                return;
             }
-            Console.Write("Tanggal: ");
+            Console.Write("Tanggal [DD/MM/YYYY]: ");
             //pengecekan apakah input tanggal valid
-            if (DateTime.TryParse(Console.ReadLine(), out var tgl))
+            if (DateTime.TryParse(Console.ReadLine(), CultureInfo.CreateSpecificCulture("id-ID"), DateTimeStyles.None, out var tgl))
             {
                 pjl.Tanggal = tgl;
             }
@@ -80,6 +82,7 @@ namespace ProjectPenjualan
                 Console.WriteLine("Tanggal tidak valid");
                 Console.WriteLine("Tekan ENTER untuk kembali ke menu");
                 Console.ReadKey();
+                return;
             }
             Console.Write("Customer: ");
             pjl.Customer = Console.ReadLine();
@@ -112,6 +115,7 @@ namespace ProjectPenjualan
                 Console.WriteLine("Input tidak valid");
                 Console.WriteLine("Tekan ENTER untuk kembali ke menu");
                 Console.ReadKey();
+                return;
             }
             //menambahkan objek kedalam list collection
             list.Add(pjl);
@@ -128,7 +132,7 @@ namespace ProjectPenjualan
             //perulangan foreach untuk menampilkan seluruh objek di list penjualan
             foreach (Penjualan pj in list)
             {
-                Console.WriteLine($"{++counter}. {pj.Nota:000}, {pj.Tanggal:D}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
+                Console.WriteLine($"{++counter}. {pj.Nota:000}, {pj.Tanggal.ToString("d", CultureInfo.CreateSpecificCulture("id-ID"))}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
             }
 
             Console.WriteLine("\nTekan enter untuk kembali ke menu");
