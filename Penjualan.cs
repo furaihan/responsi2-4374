@@ -13,7 +13,7 @@ namespace ProjectPenjualan
         /// <summary>
         /// Properties untuk menyimpan nomer nota penjualan
         /// </summary>
-        public string Nota { get; set; }
+        public int Nota { get; set; }
         /// <summary>
         /// Properties untuk menyimpan tanggal penjualan
         /// </summary>

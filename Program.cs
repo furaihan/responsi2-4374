@@ -59,7 +59,16 @@ namespace ProjectPenjualan
             Console.WriteLine("Tambah Data Penjualan\n");
             Console.Write("Nota: ");
             Penjualan pjl = new Penjualan();
-            pjl.Nota = Console.ReadLine();
+            if (int.TryParse(Console.ReadLine(), out var note))
+            {
+                pjl.Nota = note;
+            }
+            else
+            {
+                Console.WriteLine("Input tidak valid");
+                Console.WriteLine("Tekan ENTER untuk kembali ke menu");
+                Console.ReadKey();
+            }
             Console.Write("Tanggal: ");
             //pengecekan apakah input tanggal valid
             if (DateTime.TryParse(Console.ReadLine(), out var tgl))
@@ -119,7 +128,7 @@ namespace ProjectPenjualan
             //perulangan foreach untuk menampilkan seluruh objek di list penjualan
             foreach (Penjualan pj in list)
             {
-                Console.WriteLine($"{++counter}. {pj.Nota}, {pj.Tanggal:D}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
+                Console.WriteLine($"{++counter}. {pj.Nota:000}, {pj.Tanggal:D}, {pj.Customer}, {pj.Jenis}, {pj.TotalNota}");
             }
 
             Console.WriteLine("\nTekan enter untuk kembali ke menu");
